@@ -54,7 +54,7 @@ int main(int argc, char** argv)
     ImageGrabber igb(&SLAM);
 
     ros::NodeHandle nodeHandler;
-    ros::Subscriber sub = nodeHandler.subscribe("/tello/image_raw/compressed", 1, &ImageGrabber::GrabImage, &igb);
+    ros::Subscriber sub = nodeHandler.subscribe("/camera/color/image_raw/compressed", 1, &ImageGrabber::GrabImage, &igb);
 
     ros::spin();
 
@@ -71,6 +71,7 @@ int main(int argc, char** argv)
 
 void ImageGrabber::GrabImage(const sensor_msgs::CompressedImageConstPtr& msg)
 {
+    std::cout << "Received image" << std::endl;
     // Copy the ros image message to cv::Mat.
     cv_bridge::CvImageConstPtr cv_ptr;
     try
